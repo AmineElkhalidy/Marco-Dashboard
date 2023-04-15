@@ -4,7 +4,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 // Logo
-import Logo from "../../assets/svgs/logo.svg";
+import Logo from "../../assets/images/Gradesbar-Logo.png";
 
 const Login = () => {
   // Handles form submission

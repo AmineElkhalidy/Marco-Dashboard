@@ -5,7 +5,7 @@ import Dashboard from "./scenes/dashboard";
 import SideBar from "./scenes/global/Sidebar";
 
 // React Router Components
-import { Link, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
 // MUI
 import { CssBaseline, ThemeProvider, createTheme } from "@mui/material";

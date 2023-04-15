@@ -13,6 +13,7 @@ import { ReactComponent as Delete } from "../../assets/svgs/Remove.svg";
 
 // Components
 import SideBar from "../global/Sidebar";
+import AddCompany from "../company/AddCompany";
 
 // Images
 import ProfileImage from "../../assets/images/Profile.png";
@@ -22,6 +23,10 @@ import LogoutSVG from "../../assets/svgs/Logout.svg";
 import { companiesList } from "../../data/data";
 
 const Dashboard = () => {
+  // Drawer State
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+
+  // Columns
   const columns = [
     { field: "id", headerName: "Company ID", headerAlign: "left" },
     {
@@ -122,7 +127,10 @@ const Dashboard = () => {
           >
             Company lists
           </Typography>
-          <button className="bg-textColor py-[12px] px-[40px] rounded-[10px] text-white ">
+          <button
+            className="bg-textColor py-[12px] px-[40px] rounded-[10px] text-white"
+            onClick={() => setIsDrawerOpen(true)}
+          >
             New company +
           </button>
         </Box>
@@ -140,6 +148,12 @@ const Dashboard = () => {
         >
           <DataGrid checkboxSelection rows={companiesList} columns={columns} />
         </Box>
+
+        <AddCompany
+          open={isDrawerOpen}
+          onClose={() => setIsDrawerOpen(false)}
+          setIsDrawerOpen={setIsDrawerOpen}
+        />
       </div>
     </div>
   );
