@@ -8,9 +8,9 @@ const Login = () => {
   const handleSubmit = () => {};
 
   return (
-    <div className="w-full min-h-screen bg-bgColor relative">
-      <div className="w-full h-screen flex justify-center items-center">
-        <div className="max-w-md w-full bg-white py-16 px-8 rounded-[10px] shadow-sm grid my-4">
+    <div className="bg-bgColor relative">
+      <div className="w-full min-h-screen flex justify-center items-center">
+        <div className="max-w-lg w-full bg-white py-16 px-8 rounded-[10px] shadow-sm grid my-6 mx-3 sm:mx-0">
           <img
             className="justify-self-center"
             src={Logo}
