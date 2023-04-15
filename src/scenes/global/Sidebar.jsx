@@ -22,6 +22,10 @@ const SideBar = () => {
   return (
     <Box
       sx={{
+        "& .ps-sidebar-root": {
+          width: "218px",
+          minWidth: "218px",
+        },
         "& .ps-sidebar-container": {
           background: "#000223",
           height: "100vh",
@@ -35,13 +39,15 @@ const SideBar = () => {
         <Menu>
           {/* Logo */}
           <MenuItem onClick={() => collapseSidebar()}>
-            <Box mt={"2rem"}>
-              <img src={Logo} alt="Gradesbar Logo" />
-            </Box>
+            {!collapsed && (
+              <Box mt={"2rem"}>
+                <img src={Logo} alt="Gradesbar Logo" />
+              </Box>
+            )}
           </MenuItem>
 
           {/* Menu items */}
-          <Box paddingLeft={collapsed ? undefined : "1%"} marginTop="3rem">
+          <Box paddingLeft={collapsed ? undefined : "1%"} marginTop="2rem">
             <MenuItem icon={<List />}>
               <Typography sx={{ color: "white", fontWeight: 500 }}>
                 Company Lists
@@ -49,7 +55,7 @@ const SideBar = () => {
             </MenuItem>
 
             <Box paddingLeft="2.75rem">
-              <MenuItem
+              {/* <MenuItem
                 routerLink={
                   <NavLink
                     className={({ isActive }) =>
@@ -62,7 +68,7 @@ const SideBar = () => {
                 <Typography sx={{ color: "white", fontWeight: 500 }}>
                   Mcdonald’s
                 </Typography>
-              </MenuItem>
+              </MenuItem> */}
             </Box>
           </Box>
         </Menu>
