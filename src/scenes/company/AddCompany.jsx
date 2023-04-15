@@ -18,13 +18,102 @@ import {
   AppBar,
 } from "@mui/material";
 
+// Steps
+import { Steps, StepsProvider, useSteps } from "react-step-builder";
+
 // Icons
 import CloseSVG from "../../assets/svgs/close.svg";
 import UploadImage from "../../assets/images/upload.png";
 import SuccessSVG from "../../assets/svgs/success.svg";
 
-// Steps
-import { Steps, StepsProvider, useSteps } from "react-step-builder";
+// Tabs functions
+function TabPanel(props) {
+  const { children, value, index, ...other } = props;
+
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`full-width-tabpanel-${index}`}
+      aria-labelledby={`full-width-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box sx={{ p: 3 }}>
+          <Typography>{children}</Typography>
+        </Box>
+      )}
+    </div>
+  );
+}
+
+TabPanel.propTypes = {
+  children: PropTypes.node,
+  index: PropTypes.number.isRequired,
+  value: PropTypes.number.isRequired,
+};
+
+function a11yProps(index) {
+  return {
+    id: `full-width-tab-${index}`,
+    "aria-controls": `full-width-tabpanel-${index}`,
+  };
+}
+
+function FullWidthTabs() {
+  const [value, setValue] = React.useState(0);
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+
+  const handleChangeIndex = (index) => {
+    setValue(index);
+  };
+
+  return (
+    <Box
+      my={3}
+      sx={{
+        "& .MuiPaper-root": {
+          background: "#000223",
+          borderRadius: "10px",
+          paddingInline: ".65rem",
+        },
+      }}
+    >
+      <AppBar position="static">
+        <Tabs
+          value={value}
+          onChange={handleChange}
+          indicatorColor="secondary"
+          textColor="inherit"
+          variant="fullWidth"
+          aria-label="full width tabs example"
+        >
+          <Tab label="Initial infos" {...a11yProps(0)} />
+          <Tab label="Contact" {...a11yProps(1)} />
+          <Tab label="Media" {...a11yProps(2)} />
+          <Tab label="Reviews" {...a11yProps(3)} />
+        </Tabs>
+      </AppBar>
+      <SwipeableViews axis="x" index={value} onChangeIndex={handleChangeIndex}>
+        <TabPanel value={value} index={0}>
+          <InitialInfo />
+        </TabPanel>
+        <TabPanel value={value} index={1}>
+          <Contact />
+        </TabPanel>
+        <TabPanel value={value} index={2}>
+          <Media />
+        </TabPanel>
+        <TabPanel value={value} index={3}>
+          <Reviews />
+        </TabPanel>
+      </SwipeableViews>
+    </Box>
+  );
+}
 
 function InitialInfo({ next, setIsDrawerOpen }) {
   return (
@@ -82,7 +171,9 @@ function InitialInfo({ next, setIsDrawerOpen }) {
               Color
             </Typography>
 
-            <button className="text-textColor font-medium">+ Add</button>
+            <button className="text-[#788B9A] font-medium hover:text-textColor">
+              + Add
+            </button>
           </Box>
         </Box>
         {/* First Row of Colors */}
@@ -303,11 +394,12 @@ function Success({ setIsDrawerOpen }) {
       width="100%"
       height="100%"
       display="flex"
+      flexDirection="column"
       justifyContent="center"
       alignItems="center"
     >
       <img src={SuccessSVG} alt="Successfully registered!" />
-      <Typography sx={{ fontWeight: 700, fontSize: "22px" }}>
+      <Typography my={3} sx={{ fontWeight: 700, fontSize: "22px" }}>
         Your company successfully created.
       </Typography>
 
@@ -354,16 +446,13 @@ const AddCompany = ({ open, onClose, setIsDrawerOpen }) => {
         </Box>
 
         {/* Drawer tabs */}
-        <Box
-          my="2rem"
-          sx={{ width: "100%", background: "#bbb", borderRadius: "10px" }}
-        ></Box>
+        <FullWidthTabs />
 
-        <Box width="100%">
+        {/* <Box width="100%">
           <StepsProvider>
             <StepsBuilder setIsDrawerOpen={setIsDrawerOpen} />
           </StepsProvider>
-        </Box>
+        </Box> */}
       </Box>
     </Drawer>
   );

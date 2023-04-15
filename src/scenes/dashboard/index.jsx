@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 
+import PropTypes from "prop-types";
+import SwipeableViews from "react-swipeable-views";
+
 // MUI
-import { Box, IconButton, Typography, Button } from "@mui/material";
+import { Box, IconButton, Typography, Tabs, Tab, AppBar } from "@mui/material";
 import InputBase from "@mui/material/InputBase";
 
 // DataGrid
@@ -113,6 +116,7 @@ const Dashboard = () => {
           </Box>
         </Box>
 
+        {/* Add Company */}
         <Box
           display="flex"
           justifyContent="space-between"
@@ -137,6 +141,7 @@ const Dashboard = () => {
 
         {/* Table */}
         <Box
+          marginX="1rem"
           sx={{
             "& .MuiDataGrid-root": {
               border: "none",
