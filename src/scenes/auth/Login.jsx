@@ -1,7 +1,10 @@
 import React from "react";
 
+// Link
+import { Link } from "react-router-dom";
+
 // Logo
-import Logo from "../assets/images/logo.svg";
+import Logo from "../../assets/svgs/logo.svg";
 
 const Login = () => {
   // Handles form submission
@@ -54,12 +57,13 @@ const Login = () => {
               />
             </div>
 
-            <button
-              className="w-full bg-textColor p-3 text-white rounded-[10px] uppercase font-medium"
+            <Link
+              to="/dashboard"
+              className="w-full text-center bg-textColor p-3 text-white rounded-[10px] uppercase font-medium"
               type="submit"
             >
               Login
-            </button>
+            </Link>
           </form>
         </div>
       </div>

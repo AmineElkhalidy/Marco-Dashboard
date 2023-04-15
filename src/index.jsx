@@ -11,9 +11,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 // Pro sidebar
 import { ProSidebarProvider } from "react-pro-sidebar";
 
-const root = ReactDOM.createRoot(
-  document.getElementById("root") as HTMLElement
-);
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <Router>
