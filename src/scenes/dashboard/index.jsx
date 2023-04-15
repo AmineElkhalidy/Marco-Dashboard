@@ -4,8 +4,12 @@ import React, { useState } from "react";
 import { Box, IconButton, Typography, Button } from "@mui/material";
 import InputBase from "@mui/material/InputBase";
 
+// DataGrid
+import { DataGrid, GridToolbar } from "@mui/x-data-grid";
+
 // Icons
-import { Search, AddIcon } from "@mui/icons-material";
+import { Search } from "@mui/icons-material";
+import { ReactComponent as Delete } from "../../assets/svgs/Remove.svg";
 
 // Components
 import SideBar from "../global/Sidebar";
@@ -14,7 +18,50 @@ import SideBar from "../global/Sidebar";
 import ProfileImage from "../../assets/images/Profile.png";
 import LogoutSVG from "../../assets/svgs/Logout.svg";
 
+// data
+import { companiesList } from "../../data/data";
+
 const Dashboard = () => {
+  const columns = [
+    { field: "id", headerName: "Company ID", headerAlign: "left" },
+    {
+      field: "companyName",
+      headerName: "Company Name",
+      flex: 1,
+      headerAlign: "center",
+    },
+    {
+      field: "loaction",
+      headerName: "Location",
+    },
+    {
+      field: "dateCreated",
+      headerName: "Date Created",
+      type: "date",
+      flex: 1,
+      valueGetter: (params) => new Date(params.value),
+    },
+    {
+      field: "lastLoggedin",
+      headerName: "Last Logged in",
+      type: "date",
+      flex: 1,
+      valueGetter: (params) => new Date(params.value),
+    },
+    {
+      field: "active",
+      headerName: "Active",
+    },
+    {
+      field: "action",
+      headerName: "Action",
+    },
+    {
+      field: "remove",
+      headerName: "Remove",
+      renderHeader: () => <Delete />,
+    },
+  ];
   return (
     <div className="w-full flex realtive">
       <SideBar />
@@ -78,6 +125,20 @@ const Dashboard = () => {
           <button className="bg-textColor py-[12px] px-[40px] rounded-[10px] text-white ">
             New company +
           </button>
+        </Box>
+
+        {/* Table */}
+        <Box
+          sx={{
+            "& .MuiDataGrid-root": {
+              border: "none",
+            },
+            "& .MuiDataGrid-footerContainer": {
+              border: "none",
+            },
+          }}
+        >
+          <DataGrid checkboxSelection rows={companiesList} columns={columns} />
         </Box>
       </div>
     </div>
