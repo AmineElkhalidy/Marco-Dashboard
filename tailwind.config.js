@@ -9,6 +9,9 @@ module.exports = {
         inputBgColor: "#F1F4FA",
         placeholderColor: "#788B9A",
       },
+      fontFamily: {
+        sans: ["DM Sans", "sans-serif"],
+      },
     },
   },
   plugins: [],

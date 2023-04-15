@@ -8,7 +8,7 @@ const Login = () => {
   const handleSubmit = () => {};
 
   return (
-    <div className="bg-bgColor relative">
+    <div className="bg-bgColor font-sans">
       <div className="w-full min-h-screen flex justify-center items-center">
         <div className="max-w-lg w-full bg-white py-16 px-8 rounded-[10px] shadow-sm grid my-6 mx-3 sm:mx-0">
           <img
@@ -18,7 +18,7 @@ const Login = () => {
           />
 
           <form
-            className="flex flex-col items-start w-full mt-6"
+            className="flex flex-col items-start w-full mt-10"
             action="#"
             onSubmit={handleSubmit}
           >
