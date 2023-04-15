@@ -6,6 +6,8 @@ module.exports = {
       colors: {
         textColor: "#000223",
         bgColor: "#ECEFF5",
+        inputBgColor: "#F1F4FA",
+        placeholderColor: "#788B9A",
       },
     },
   },
