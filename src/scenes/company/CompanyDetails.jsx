@@ -95,7 +95,7 @@ const CompanyDetails = () => {
               </li>
 
               <li className="w-[230px] h-[60px] text-textColor rounded-[10px] text-center flex items-center justify-center">
-                <Link to="/company-details/score" className="text-xl">
+                <Link to="/company-details/unique" className="text-xl">
                   Unique
                 </Link>
               </li>

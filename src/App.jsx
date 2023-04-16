@@ -3,6 +3,8 @@ import React from "react";
 import Login from "./scenes/auth/Login";
 import Dashboard from "./scenes/dashboard";
 import CompanyDetails from "./scenes/company/CompanyDetails";
+import Score from "./scenes/company/Score";
+import Unique from "./scenes/company/Unique";
 
 // React Router Components
 import { Routes, Route } from "react-router-dom";
@@ -26,6 +28,8 @@ const App = () => {
           <Route path="/" element={<Login />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/company-details" element={<CompanyDetails />} />
+          <Route path="/company-details/score" element={<Score />} />
+          <Route path="/company-details/unique" element={<Unique />} />
         </Routes>
       </main>
     </ThemeProvider>
