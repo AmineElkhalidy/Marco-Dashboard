@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 // MUI
-import { Box, IconButton, Typography, Switch } from "@mui/material";
+import { Box, IconButton, Typography, Switch, TextField } from "@mui/material";
 
 // Sidebar
 import SideBar from "../global/Sidebar";
@@ -14,9 +14,14 @@ import ProfileImage from "../../assets/images/Profile.png";
 import LogoutSVG from "../../assets/svgs/Logout.svg";
 import Mcdonald from "../../assets/svgs/mc.svg";
 import EditSVG from "../../assets/svgs/edit.svg";
+import UploadImage from "../../assets/images/upload.png";
 
 const CompanyDetails = () => {
   const [checked, setChecked] = useState(true);
+  const [initialUpdate, setInitialUpdate] = useState(false);
+  const [contactUpdate, setContactUpdate] = useState(false);
+  const [mediaUpdate, setMediaUpdate] = useState(false);
+  const [reviewsUpdate, setReviewsUpdate] = useState(false);
 
   const handleChange = (event) => {
     setChecked(event.target.checked);
@@ -125,109 +130,220 @@ const CompanyDetails = () => {
               Initial infos
             </Typography>
 
-            <Box
-              width="100%"
-              sx={{ bgcolor: "white" }}
-              paddingX={2}
-              paddingY={3}
-              display="flex"
-              justifyContent="space-between"
-              alignItems="center"
-            >
-              <Box
-                display="flex"
-                justifyContent="space-between"
-                alignItems="center"
-                gap={6}
-              >
-                {/* Name */}
-                <Box>
-                  <Typography
-                    variant="h3"
-                    className="text-textColor"
-                    sx={{
-                      fontSize: "20px",
-                      fontWeight: 700,
-                      marginBottom: "10px",
-                    }}
+            {!initialUpdate ? (
+              <Box width="100%">
+                <Box
+                  width="100%"
+                  sx={{ bgcolor: "white" }}
+                  paddingX={2}
+                  paddingY={3}
+                  display="flex"
+                  justifyContent="space-between"
+                  alignItems="center"
+                >
+                  <Box
+                    display="flex"
+                    justifyContent="space-between"
+                    alignItems="center"
+                    gap={6}
                   >
-                    Name
-                  </Typography>
-                  <Typography>Mcdonald's</Typography>
-                </Box>
+                    {/* Name */}
+                    <Box>
+                      <Typography
+                        variant="h3"
+                        className="text-textColor"
+                        sx={{
+                          fontSize: "20px",
+                          fontWeight: 700,
+                          marginBottom: "10px",
+                        }}
+                      >
+                        Name
+                      </Typography>
+                      <Typography>Mcdonald's</Typography>
+                    </Box>
 
-                {/* Address */}
-                <Box>
-                  <Typography
-                    variant="h3"
-                    className="text-textColor"
-                    sx={{
-                      fontSize: "20px",
-                      fontWeight: 700,
-                      marginBottom: "10px",
-                    }}
-                  >
-                    Address
-                  </Typography>
-                  <Typography>Address line 01</Typography>
-                </Box>
+                    {/* Address */}
+                    <Box>
+                      <Typography
+                        variant="h3"
+                        className="text-textColor"
+                        sx={{
+                          fontSize: "20px",
+                          fontWeight: 700,
+                          marginBottom: "10px",
+                        }}
+                      >
+                        Address
+                      </Typography>
+                      <Typography>Address line 01</Typography>
+                    </Box>
 
-                {/* Type */}
-                <Box>
-                  <Typography
-                    variant="h3"
-                    className="text-textColor"
-                    sx={{
-                      fontSize: "20px",
-                      fontWeight: 700,
-                      marginBottom: "10px",
-                    }}
-                  >
-                    Type
-                  </Typography>
-                  <Typography>Address line 01</Typography>
-                </Box>
+                    {/* Type */}
+                    <Box>
+                      <Typography
+                        variant="h3"
+                        className="text-textColor"
+                        sx={{
+                          fontSize: "20px",
+                          fontWeight: 700,
+                          marginBottom: "10px",
+                        }}
+                      >
+                        Type
+                      </Typography>
+                      <Typography>Address line 01</Typography>
+                    </Box>
 
-                {/* Company Number */}
-                <Box>
-                  <Typography
-                    variant="h3"
-                    className="text-textColor"
-                    sx={{
-                      fontSize: "20px",
-                      fontWeight: 700,
-                      marginBottom: "10px",
-                    }}
-                  >
-                    Company Number
-                  </Typography>
-                  <Typography>Number</Typography>
-                </Box>
+                    {/* Company Number */}
+                    <Box>
+                      <Typography
+                        variant="h3"
+                        className="text-textColor"
+                        sx={{
+                          fontSize: "20px",
+                          fontWeight: 700,
+                          marginBottom: "10px",
+                        }}
+                      >
+                        Company Number
+                      </Typography>
+                      <Typography>Number</Typography>
+                    </Box>
 
-                {/* Date Incorporated */}
-                <Box>
-                  <Typography
-                    variant="h3"
-                    className="text-textColor"
-                    sx={{
-                      fontSize: "20px",
-                      fontWeight: 700,
-                      marginBottom: "10px",
-                    }}
-                  >
-                    Date Incorporated
-                  </Typography>
-                  <Typography>Address line 01</Typography>
+                    {/* Date Incorporated */}
+                    <Box>
+                      <Typography
+                        variant="h3"
+                        className="text-textColor"
+                        sx={{
+                          fontSize: "20px",
+                          fontWeight: 700,
+                          marginBottom: "10px",
+                        }}
+                      >
+                        Date Incorporated
+                      </Typography>
+                      <Typography>Address line 01</Typography>
+                    </Box>
+                  </Box>
+
+                  {/* Edit button */}
+                  <Box>
+                    <button onClick={() => setInitialUpdate(true)}>
+                      <img src={EditSVG} alt="Edit SVG" />
+                    </button>
+                  </Box>
                 </Box>
               </Box>
+            ) : (
+              <Box width="100%" bgcolor="white" py={3} px={4}>
+                <Box component="form" width="100%">
+                  <Box
+                    width="100%"
+                    display="flex"
+                    justifyContent="center"
+                    alignItems="center"
+                    mb={3}
+                  >
+                    <label htmlFor="file">
+                      <img src={UploadImage} alt="Uploading..." />
+                    </label>
+                    <input
+                      type="file"
+                      name="file"
+                      id="file"
+                      style={{ visibility: "none", display: "none" }}
+                    />
+                  </Box>
 
-              {/* Edit button */}
-              <Box>
-                <button>
-                  <img src={EditSVG} alt="Edit SVG" />
-                </button>
+                  <div className="grid grid-cols-2 gap-4">
+                    <Box width="100%">
+                      <TextField fullWidth label="Company Name" />
+                    </Box>
+                    <Box width="100%">
+                      <TextField fullWidth label="Company ID" />
+                    </Box>
+                    <Box width="100%">
+                      <TextField fullWidth type="date" />
+                    </Box>
+                    <Box width="100%">
+                      <TextField fullWidth label="Address" />
+                    </Box>
+                    <Box width="100%">
+                      <TextField fullWidth label="Location" />
+                    </Box>
+                    <Box width="100%">
+                      <TextField fullWidth label="City" />
+                    </Box>
+                    <Box width="100%">
+                      <TextField fullWidth label="Type" />
+                    </Box>
+
+                    {/* Color Picker */}
+                    <Box width="100%">
+                      <Box>
+                        <Box
+                          display="flex"
+                          justifyContent="space-between"
+                          alignItems="center"
+                        >
+                          <Typography
+                            variant="h4"
+                            sx={{ fontWeight: 500, fontSize: "18px" }}
+                          >
+                            Color
+                          </Typography>
+
+                          <button className="text-[#788B9A] font-medium hover:text-textColor">
+                            + Add
+                          </button>
+                        </Box>
+                      </Box>
+                      {/* First Row of Colors */}
+                      <Box
+                        width="100%"
+                        display="flex"
+                        justifyContent="space-between"
+                        my={2}
+                      >
+                        {[
+                          "#EF4444",
+                          "#F97316",
+                          "#FACC15",
+                          "#4ADE80",
+                          "#2DD4BF",
+                          "#3B82F6",
+                          "#6467F2",
+                        ].map((color, index) => (
+                          <div
+                            key={index}
+                            className="w-[24px] h-[24px] rounded-full"
+                            style={{ background: color }}
+                          />
+                        ))}
+                      </Box>
+                    </Box>
+                  </div>
+                </Box>
+
+                {/* Buttons Container */}
+                <Box
+                  width="100%"
+                  display="flex"
+                  justifyContent="flex-end"
+                  alignItems="center"
+                  mt="2rem"
+                >
+                  <button
+                    onClick={() => setInitialUpdate(false)}
+                    className="py-4 px-12 text-[18px] font-medium text-white rounded-[10px] bg-textColor"
+                  >
+                    Update
+                  </button>
+                </Box>
               </Box>
-            </Box>
+            )}
           </Box>
 
           {/* Contact */}
@@ -240,77 +356,113 @@ const CompanyDetails = () => {
               Contact
             </Typography>
 
-            <Box
-              width="100%"
-              sx={{ bgcolor: "white" }}
-              paddingX={2}
-              paddingY={3}
-              display="flex"
-              justifyContent="space-between"
-              alignItems="center"
-            >
-              <Box
-                display="flex"
-                justifyContent="space-between"
-                alignItems="center"
-                gap={8}
-              >
-                {/* Phone */}
-                <Box>
-                  <Typography
-                    variant="h3"
-                    className="text-textColor"
-                    sx={{
-                      fontSize: "20px",
-                      fontWeight: 700,
-                      marginBottom: "10px",
-                    }}
+            {!contactUpdate ? (
+              <Box width="100%">
+                <Box
+                  width="100%"
+                  sx={{ bgcolor: "white" }}
+                  paddingX={2}
+                  paddingY={3}
+                  display="flex"
+                  justifyContent="space-between"
+                  alignItems="center"
+                >
+                  <Box
+                    display="flex"
+                    justifyContent="space-between"
+                    alignItems="center"
+                    gap={8}
                   >
-                    Phone Number
-                  </Typography>
-                  <Typography>0203 111 1111</Typography>
-                </Box>
+                    {/* Phone */}
+                    <Box>
+                      <Typography
+                        variant="h3"
+                        className="text-textColor"
+                        sx={{
+                          fontSize: "20px",
+                          fontWeight: 700,
+                          marginBottom: "10px",
+                        }}
+                      >
+                        Phone Number
+                      </Typography>
+                      <Typography>0203 111 1111</Typography>
+                    </Box>
 
-                {/* Email */}
-                <Box>
-                  <Typography
-                    variant="h3"
-                    className="text-textColor"
-                    sx={{
-                      fontSize: "20px",
-                      fontWeight: 700,
-                      marginBottom: "10px",
-                    }}
-                  >
-                    Email
-                  </Typography>
-                  <Typography>test@email.com</Typography>
-                </Box>
+                    {/* Email */}
+                    <Box>
+                      <Typography
+                        variant="h3"
+                        className="text-textColor"
+                        sx={{
+                          fontSize: "20px",
+                          fontWeight: 700,
+                          marginBottom: "10px",
+                        }}
+                      >
+                        Email
+                      </Typography>
+                      <Typography>test@email.com</Typography>
+                    </Box>
 
-                {/* Website */}
-                <Box>
-                  <Typography
-                    variant="h3"
-                    className="text-textColor"
-                    sx={{
-                      fontSize: "20px",
-                      fontWeight: 700,
-                      marginBottom: "10px",
-                    }}
-                  >
-                    Website
-                  </Typography>
-                  <Typography>mcdonalds@gmail.com</Typography>
+                    {/* Website */}
+                    <Box>
+                      <Typography
+                        variant="h3"
+                        className="text-textColor"
+                        sx={{
+                          fontSize: "20px",
+                          fontWeight: 700,
+                          marginBottom: "10px",
+                        }}
+                      >
+                        Website
+                      </Typography>
+                      <Typography>mcdonalds@gmail.com</Typography>
+                    </Box>
+                  </Box>
+
+                  {/* Edit button */}
+                  <Box>
+                    <button onClick={() => setContactUpdate(true)}>
+                      <img src={EditSVG} alt="Edit SVG" />
+                    </button>
+                  </Box>
                 </Box>
               </Box>
+            ) : (
+              <Box width="100%" bgcolor="white" py={3} px={4}>
+                <Box component="form" width="100%">
+                  <div className="grid grid-cols-2 gap-4">
+                    <Box width="100%">
+                      <TextField fullWidth label="Phone Number" type="tel" />
+                    </Box>
+                    <Box width="100%">
+                      <TextField fullWidth label="Email" type="email" />
+                    </Box>
+                    <Box width="100%">
+                      <TextField fullWidth label="Website" />
+                    </Box>
+                  </div>
+                </Box>
 
-              {/* Edit button */}
-              <Box>
-                <button>
-                  <img src={EditSVG} alt="Edit SVG" />
-                </button>
+                {/* Buttons Container */}
+                <Box
+                  width="100%"
+                  display="flex"
+                  justifyContent="flex-end"
+                  alignItems="center"
+                  mt="2rem"
+                >
+                  <button
+                    onClick={() => setContactUpdate(false)}
+                    className="py-4 px-12 text-[18px] font-medium text-white rounded-[10px] bg-textColor"
+                  >
+                    Update
+                  </button>
+                </Box>
               </Box>
-            </Box>
+            )}
           </Box>
 
           {/* Reviews */}
@@ -323,77 +475,133 @@ const CompanyDetails = () => {
               Reviews
             </Typography>
 
-            <Box
-              width="100%"
-              sx={{ bgcolor: "white" }}
-              paddingX={2}
-              paddingY={3}
-              display="flex"
-              justifyContent="space-between"
-              alignItems="center"
-            >
+            {!reviewsUpdate ? (
               <Box
+                width="100%"
+                sx={{ bgcolor: "white" }}
+                paddingX={2}
+                paddingY={3}
                 display="flex"
                 justifyContent="space-between"
                 alignItems="center"
-                gap={8}
               >
-                {/* Google */}
-                <Box>
-                  <Typography
-                    variant="h3"
-                    className="text-textColor"
-                    sx={{
-                      fontSize: "20px",
-                      fontWeight: 700,
-                      marginBottom: "10px",
-                    }}
-                  >
-                    Google
-                  </Typography>
-                  <Typography>2300 reviews (4.5)</Typography>
+                <Box
+                  display="flex"
+                  justifyContent="space-between"
+                  alignItems="center"
+                  gap={8}
+                >
+                  {/* Google */}
+                  <Box>
+                    <Typography
+                      variant="h3"
+                      className="text-textColor"
+                      sx={{
+                        fontSize: "20px",
+                        fontWeight: 700,
+                        marginBottom: "10px",
+                      }}
+                    >
+                      Google
+                    </Typography>
+                    <Typography>2300 reviews (4.5)</Typography>
+                  </Box>
+
+                  {/* Trust Pilot */}
+                  <Box>
+                    <Typography
+                      variant="h3"
+                      className="text-textColor"
+                      sx={{
+                        fontSize: "20px",
+                        fontWeight: 700,
+                        marginBottom: "10px",
+                      }}
+                    >
+                      Trust Pilot
+                    </Typography>
+                    <Typography>1500 reviews (4.3)</Typography>
+                  </Box>
+
+                  {/* Facebook */}
+                  <Box>
+                    <Typography
+                      variant="h3"
+                      className="text-textColor"
+                      sx={{
+                        fontSize: "20px",
+                        fontWeight: 700,
+                        marginBottom: "10px",
+                      }}
+                    >
+                      Facebook
+                    </Typography>
+                    <Typography>30 reviews (5)</Typography>
+                  </Box>
                 </Box>
 
-                {/* Trust Pilot */}
+                {/* Edit button */}
                 <Box>
-                  <Typography
-                    variant="h3"
-                    className="text-textColor"
-                    sx={{
-                      fontSize: "20px",
-                      fontWeight: 700,
-                      marginBottom: "10px",
-                    }}
-                  >
-                    Trust Pilot
-                  </Typography>
-                  <Typography>1500 reviews (4.3)</Typography>
-                </Box>
-
-                {/* Facebook */}
-                <Box>
-                  <Typography
-                    variant="h3"
-                    className="text-textColor"
-                    sx={{
-                      fontSize: "20px",
-                      fontWeight: 700,
-                      marginBottom: "10px",
-                    }}
-                  >
-                    Facebook
-                  </Typography>
-                  <Typography>30 reviews (5)</Typography>
+                  <button onClick={() => setReviewsUpdate(true)}>
+                    <img src={EditSVG} alt="Edit SVG" />
+                  </button>
                 </Box>
               </Box>
+            ) : (
+              <Box width="100%" bgcolor="white" py={3} px={4}>
+                <Box component="form" width="100%">
+                  <Box width="100%" mb={4}>
+                    <Box my={2} width="100%">
+                      <TextField fullWidth label="Review 1" />
+                    </Box>
+                    <div className="grid grid-cols-2 gap-4">
+                      <Box width="100%">
+                        <TextField fullWidth label="Total Reviews" />
+                      </Box>
+                      <Box width="100%">
+                        <TextField fullWidth label="Score" />
+                      </Box>
+                    </div>
+                  </Box>
 
-              {/* Edit button */}
-              <Box>
-                <button>
-                  <img src={EditSVG} alt="Edit SVG" />
-                </button>
+                  <Box width="100%">
+                    <Box my={2} width="100%">
+                      <TextField fullWidth label="Review 2" />
+                    </Box>
+                    <div className="grid grid-cols-2 gap-4">
+                      <Box width="100%">
+                        <TextField fullWidth label="Total Reviews" />
+                      </Box>
+                      <Box width="100%">
+                        <TextField fullWidth label="Score" />
+                      </Box>
+                    </div>
+                  </Box>
+
+                  <Box width="100%" textAlign="right" mt={2}>
+                    <button className="text-[#788B9A] text-right">
+                      + Add another review
+                    </button>
+                  </Box>
+                </Box>
+
+                {/* Buttons Container */}
+                <Box
+                  width="100%"
+                  display="flex"
+                  justifyContent="flex-end"
+                  alignItems="center"
+                  mt="2rem"
+                >
+                  <button
+                    onClick={() => setReviewsUpdate(false)}
+                    className="py-4 px-12 text-[18px] font-medium text-white rounded-[10px] bg-textColor"
+                  >
+                    Update
+                  </button>
+                </Box>
               </Box>
-            </Box>
+            )}
           </Box>
 
           {/* Social Media */}
@@ -406,61 +614,107 @@ const CompanyDetails = () => {
               Social media
             </Typography>
 
-            <Box
-              width="100%"
-              sx={{ bgcolor: "white" }}
-              paddingX={2}
-              paddingY={3}
-              display="flex"
-              justifyContent="space-between"
-              alignItems="center"
-            >
+            {!mediaUpdate ? (
               <Box
+                width="100%"
+                sx={{ bgcolor: "white" }}
+                paddingX={2}
+                paddingY={3}
                 display="flex"
                 justifyContent="space-between"
                 alignItems="center"
-                gap={8}
               >
-                {/* Instagram */}
-                <Box>
-                  <Typography
-                    variant="h3"
-                    className="text-textColor"
-                    sx={{
-                      fontSize: "20px",
-                      fontWeight: 700,
-                      marginBottom: "10px",
-                    }}
-                  >
-                    Instagram
-                  </Typography>
-                  <Typography>@mcdonalds</Typography>
+                <Box
+                  display="flex"
+                  justifyContent="space-between"
+                  alignItems="center"
+                  gap={8}
+                >
+                  {/* Instagram */}
+                  <Box>
+                    <Typography
+                      variant="h3"
+                      className="text-textColor"
+                      sx={{
+                        fontSize: "20px",
+                        fontWeight: 700,
+                        marginBottom: "10px",
+                      }}
+                    >
+                      Instagram
+                    </Typography>
+                    <Typography>@mcdonalds</Typography>
+                  </Box>
+
+                  {/* Facebook */}
+                  <Box>
+                    <Typography
+                      variant="h3"
+                      className="text-textColor"
+                      sx={{
+                        fontSize: "20px",
+                        fontWeight: 700,
+                        marginBottom: "10px",
+                      }}
+                    >
+                      Facebook
+                    </Typography>
+                    <Typography>@mcdonalds</Typography>
+                  </Box>
                 </Box>
 
-                {/* Facebook */}
+                {/* Edit button */}
                 <Box>
-                  <Typography
-                    variant="h3"
-                    className="text-textColor"
-                    sx={{
-                      fontSize: "20px",
-                      fontWeight: 700,
-                      marginBottom: "10px",
-                    }}
-                  >
-                    Facebook
-                  </Typography>
-                  <Typography>@mcdonalds</Typography>
+                  <button onClick={() => setMediaUpdate(true)}>
+                    <img src={EditSVG} alt="Edit SVG" />
+                  </button>
                 </Box>
               </Box>
+            ) : (
+              <Box width="100%" bgcolor="white" py={3} px={4}>
+                <Box component="form" width="100%">
+                  <div className="grid grid-cols-2 gap-4">
+                    <Box width="100%">
+                      <TextField fullWidth label="Social Media 1" />
+                    </Box>
+                    <Box width="100%">
+                      <TextField fullWidth label="Link" />
+                    </Box>
+                  </div>
 
-              {/* Edit button */}
-              <Box>
-                <button>
-                  <img src={EditSVG} alt="Edit SVG" />
-                </button>
+                  <div className="grid grid-cols-2 gap-4 mt-4 mb-2">
+                    <Box width="100%">
+                      <TextField fullWidth label="Social Media 2" />
+                    </Box>
+                    <Box width="100%">
+                      <TextField fullWidth label="Link" />
+                    </Box>
+                  </div>
+
+                  <Box width="100%" textAlign="right">
+                    <button className="text-[#788B9A] text-right">
+                      + Add another social media
+                    </button>
+                  </Box>
+                </Box>
+
+                {/* Buttons Container */}
+                <Box
+                  width="100%"
+                  display="flex"
+                  justifyContent="flex-end"
+                  alignItems="center"
+                  mt="2rem"
+                >
+                  <button
+                    onClick={() => setMediaUpdate(false)}
+                    className="py-4 px-12 text-[18px] font-medium text-white rounded-[10px] bg-textColor"
+                  >
+                    Update
+                  </button>
+                </Box>
               </Box>
-            </Box>
+            )}
           </Box>
         </Box>
       </div>
