@@ -4,7 +4,14 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 // MUI
-import { Box, IconButton, Typography, Switch, TextField } from "@mui/material";
+import {
+  Box,
+  IconButton,
+  Typography,
+  Switch,
+  TextField,
+  Checkbox,
+} from "@mui/material";
 
 // Sidebar
 import SideBar from "../global/Sidebar";
@@ -13,15 +20,10 @@ import SideBar from "../global/Sidebar";
 import ProfileImage from "../../assets/images/Profile.png";
 import LogoutSVG from "../../assets/svgs/Logout.svg";
 import Mcdonald from "../../assets/svgs/mc.svg";
-import EditSVG from "../../assets/svgs/edit.svg";
-import UploadImage from "../../assets/images/upload.png";
+import MenuSVG from "../../assets/svgs/menu.svg";
 
 const Score = () => {
   const [checked, setChecked] = useState(true);
-  const [initialUpdate, setInitialUpdate] = useState(false);
-  const [contactUpdate, setContactUpdate] = useState(false);
-  const [mediaUpdate, setMediaUpdate] = useState(false);
-  const [reviewsUpdate, setReviewsUpdate] = useState(false);
 
   const handleChange = (event) => {
     setChecked(event.target.checked);
@@ -112,6 +114,88 @@ const Score = () => {
         </Box>
 
         {/* Content to be edited */}
+        <div className="w-full flex gap-6 px-4 mb-4">
+          <div className="p-4 bg-white rounded-[10px] w-full">
+            <div className="w-full flex justify-between items-center">
+              <h3 className="text-lg font-medium">Scores detailed</h3>
+              <button className="">See More</button>
+            </div>
+
+            <div className="w-full scores mt-3">
+              <div className=" rounded-[2px] ">
+                <Checkbox />
+                <span className="mx-2 text-[14px] ">+10</span>
+                <span className="mx-2 text-[14px] ">Website</span>
+              </div>
+
+              <div className=" rounded-[2px] ">
+                <Checkbox />
+                <span className="mx-2 text-[14px] ">+5</span>
+                <span className="mx-2 text-[14px] ">Email</span>
+              </div>
+
+              <div className=" rounded-[2px] ">
+                <Checkbox />
+                <span className="mx-2 text-[14px] ">+5</span>
+                <span className="mx-2 text-[14px] ">Number</span>
+              </div>
+
+              <div className=" rounded-[2px] ">
+                <Checkbox />
+                <span className="mx-2 text-[14px] ">+5</span>
+                <span className="mx-2 text-[14px] ">Social Media 1</span>
+              </div>
+
+              <div className=" rounded-[2px] ">
+                <Checkbox />
+                <span className="mx-2 text-[14px] ">+5</span>
+                <span className="mx-2 text-[14px] ">Social Media 2</span>
+              </div>
+
+              <div className=" rounded-[2px] ">
+                <Checkbox />
+                <span className="mx-2 text-[14px] ">+5</span>
+                <span className="mx-2 text-[14px] ">Social Media 3</span>
+              </div>
+
+              <div className=" rounded-[2px] ">
+                <Checkbox />
+                <span className="mx-2 text-[14px] ">+5</span>
+                <span className="mx-2 text-[14px] ">
+                  Company under 6m - 12m
+                </span>
+              </div>
+
+              <div className=" rounded-[2px] ">
+                <Checkbox />
+                <span className="mx-2 text-[14px] ">+15</span>
+                <span className="mx-2 text-[14px] ">
+                  Company under 12m - 24m
+                </span>
+              </div>
+
+              <div className=" rounded-[2px] ">
+                <Checkbox />
+                <span className="mx-2 text-[14px] ">+20</span>
+                <span className="mx-2 text-[14px] ">Company over 24m</span>
+              </div>
+
+              <div className=" rounded-[2px] ">
+                <Checkbox />
+                <span className="mx-2 text-[14px] ">+15</span>
+                <span className="mx-2 text-[14px] ">Registered Business</span>
+              </div>
+            </div>
+          </div>
+          <div className="p-4 bg-white rounded-[10px] w-[50%]">
+            <div className="w-full flex justify-between items-center">
+              <h3 className="text-lg font-medium">Total Score</h3>
+              <button onClick={() => {}} className="">
+                <img src={MenuSVG} alt="Menu" />
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

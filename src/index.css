@@ -9,3 +9,7 @@ html {
 body {
   font-family: "DM Sans", sans-serif;
 }
+
+.scores > div:nth-child(odd) {
+  background-color: #f1f4fa;
+}

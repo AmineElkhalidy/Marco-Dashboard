@@ -18,10 +18,7 @@ import UploadImage from "../../assets/images/upload.png";
 
 const Unique = () => {
   const [checked, setChecked] = useState(true);
-  const [initialUpdate, setInitialUpdate] = useState(false);
-  const [contactUpdate, setContactUpdate] = useState(false);
-  const [mediaUpdate, setMediaUpdate] = useState(false);
-  const [reviewsUpdate, setReviewsUpdate] = useState(false);
+  const [infoChange, setInfoChange] = useState(false);
 
   const handleChange = (event) => {
     setChecked(event.target.checked);
@@ -112,6 +109,77 @@ const Unique = () => {
         </Box>
 
         {/* Content to be edited */}
+        <Box width="100%">
+          {/* Social Media */}
+          <Box width="100%" px={2}>
+            {!infoChange ? (
+              <Box
+                width="100%"
+                sx={{ bgcolor: "white" }}
+                paddingX={2}
+                paddingY={3}
+                display="flex"
+                justifyContent="space-between"
+                alignItems="center"
+              >
+                <Box display="flex" flexDirection="column">
+                  {/* Instagram */}
+                  <Box>
+                    <Typography
+                      variant="h3"
+                      className="text-textColor"
+                      sx={{
+                        fontSize: "20px",
+                        fontWeight: 700,
+                        marginBottom: "10px",
+                      }}
+                    >
+                      Dashboard Link
+                    </Typography>
+                    <Typography>Testcompany.gradesbar.co.uk</Typography>
+                    <Typography>Unique ID</Typography>
+                  </Box>
+                </Box>
+
+                {/* Edit button */}
+                <Box>
+                  <button onClick={() => setInfoChange(true)}>
+                    <img src={EditSVG} alt="Edit SVG" />
+                  </button>
+                </Box>
+              </Box>
+            ) : (
+              <Box width="100%" bgcolor="white" py={3} px={4}>
+                <Box component="form" width="100%">
+                  <div className="grid grid-cols-2 gap-4">
+                    <Box width="100%">
+                      <TextField fullWidth label="Company email" />
+                    </Box>
+                    <Box width="100%">
+                      <TextField fullWidth label="Unique ID" />
+                    </Box>
+                  </div>
+                </Box>
+
+                {/* Buttons Container */}
+                <Box
+                  width="100%"
+                  display="flex"
+                  justifyContent="flex-end"
+                  alignItems="center"
+                  mt="2rem"
+                >
+                  <button
+                    onClick={() => setInfoChange(false)}
+                    className="py-4 px-12 text-[18px] font-medium text-white rounded-[10px] bg-textColor"
+                  >
+                    Update
+                  </button>
+                </Box>
+              </Box>
+            )}
+          </Box>
+        </Box>
       </div>
     </div>
   );
