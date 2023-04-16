@@ -2,7 +2,7 @@ import React from "react";
 
 import Login from "./scenes/auth/Login";
 import Dashboard from "./scenes/dashboard";
-import SideBar from "./scenes/global/Sidebar";
+import CompanyDetails from "./scenes/company/CompanyDetails";
 
 // React Router Components
 import { Routes, Route } from "react-router-dom";
@@ -25,6 +25,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/company-details" element={<CompanyDetails />} />
         </Routes>
       </main>
     </ThemeProvider>

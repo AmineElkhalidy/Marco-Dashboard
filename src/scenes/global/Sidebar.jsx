@@ -28,14 +28,15 @@ const SideBar = () => {
         },
         "& .ps-sidebar-container": {
           background: "#000223",
-          height: "100vh",
+          minHeight: "100vh",
+          height: "100%",
         },
         "& .ps-menu-button:hover": {
           background: "none !important",
         },
       }}
     >
-      <Sidebar>
+      <Sidebar className="h-full">
         <Menu>
           {/* Logo */}
           <MenuItem onClick={() => collapseSidebar()}>

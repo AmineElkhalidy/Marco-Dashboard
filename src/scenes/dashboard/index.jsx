@@ -71,7 +71,7 @@ const Dashboard = () => {
     },
   ];
   return (
-    <div className="w-full flex realtive">
+    <div className="w-full flex relative">
       <SideBar />
 
       {/* Content */}
