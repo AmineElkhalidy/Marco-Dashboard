@@ -79,7 +79,7 @@ const Unique = () => {
         >
           <Box>
             <ul className="flex items-center gap-2">
-              <li className="w-[230px] h-[60px] bg-textColor text-white rounded-[10px] text-center flex items-center justify-center">
+              <li className="w-[230px] h-[60px] text-textColor rounded-[10px] text-center flex items-center justify-center">
                 <Link to="/company-details" className="text-xl">
                   Company Information
                 </Link>
@@ -91,7 +91,7 @@ const Unique = () => {
                 </Link>
               </li>
 
-              <li className="w-[230px] h-[60px] text-textColor rounded-[10px] text-center flex items-center justify-center">
+              <li className="w-[230px] h-[60px] bg-textColor text-white rounded-[10px] text-center flex items-center justify-center">
                 <Link to="/company-details/unique" className="text-xl">
                   Unique
                 </Link>
@@ -136,7 +136,9 @@ const Unique = () => {
                     >
                       Dashboard Link
                     </Typography>
-                    <Typography>Testcompany.gradesbar.co.uk</Typography>
+                    <Link to="/all-details" className="underline">
+                      Testcompany.gradesbar.co.uk
+                    </Link>
                     <Typography>Unique ID</Typography>
                   </Box>
                 </Box>

@@ -5,6 +5,7 @@ import Dashboard from "./scenes/dashboard";
 import CompanyDetails from "./scenes/company/CompanyDetails";
 import Score from "./scenes/company/Score";
 import Unique from "./scenes/company/Unique";
+import AllCompanyInfo from "./scenes/company/AllCompanyInfo";
 
 // React Router Components
 import { Routes, Route } from "react-router-dom";
@@ -30,6 +31,7 @@ const App = () => {
           <Route path="/company-details" element={<CompanyDetails />} />
           <Route path="/company-details/score" element={<Score />} />
           <Route path="/company-details/unique" element={<Unique />} />
+          <Route path="/all-details" element={<AllCompanyInfo />} />
         </Routes>
       </main>
     </ThemeProvider>
