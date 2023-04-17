@@ -99,16 +99,16 @@ function FullWidthTabs() {
       </AppBar>
       <SwipeableViews axis="x" index={value} onChangeIndex={handleChangeIndex}>
         <TabPanel value={value} index={0}>
-          <InitialInfo />
+          {/* <InitialInfo /> */}
         </TabPanel>
         <TabPanel value={value} index={1}>
-          <Contact />
+          {/* <Contact /> */}
         </TabPanel>
         <TabPanel value={value} index={2}>
-          <Media />
+          {/* <Media /> */}
         </TabPanel>
         <TabPanel value={value} index={3}>
-          <Reviews />
+          {/* <Reviews /> */}
         </TabPanel>
       </SwipeableViews>
     </Box>
@@ -448,11 +448,11 @@ const AddCompany = ({ open, onClose, setIsDrawerOpen }) => {
         {/* Drawer tabs */}
         <FullWidthTabs />
 
-        {/* <Box width="100%">
+        <Box width="100%">
           <StepsProvider>
             <StepsBuilder setIsDrawerOpen={setIsDrawerOpen} />
           </StepsProvider>
-        </Box> */}
+        </Box>
       </Box>
     </Drawer>
   );

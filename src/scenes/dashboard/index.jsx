@@ -8,7 +8,7 @@ import { Box, IconButton, Typography, Tabs, Tab, AppBar } from "@mui/material";
 import InputBase from "@mui/material/InputBase";
 
 // DataGrid
-import { DataGrid, GridToolbar } from "@mui/x-data-grid";
+import { DataGrid } from "@mui/x-data-grid";
 
 // Icons
 import { Search } from "@mui/icons-material";
@@ -35,43 +35,58 @@ const Dashboard = () => {
     {
       field: "companyName",
       headerName: "Company Name",
-      flex: 1,
       headerAlign: "center",
+      align: "center",
+      flex: 1,
     },
     {
       field: "loaction",
       headerName: "Location",
+      flex: 1,
+      headerAlign: "center",
+      align: "center",
     },
     {
       field: "dateCreated",
       headerName: "Date Created",
       type: "date",
-      flex: 1,
       valueGetter: (params) => new Date(params.value),
+      flex: 1,
+      headerAlign: "center",
+      align: "center",
     },
     {
       field: "lastLoggedin",
       headerName: "Last Logged in",
       type: "date",
-      flex: 1,
       valueGetter: (params) => new Date(params.value),
+      flex: 1,
+      headerAlign: "center",
+      align: "center",
     },
     {
       field: "active",
       headerName: "Active",
+      flex: 1,
+      headerAlign: "center",
+      align: "center",
     },
     {
       field: "action",
       headerName: "Action",
+      flex: 1,
+      headerAlign: "center",
+      align: "center",
     },
     {
       field: "remove",
       headerName: "Remove",
       renderHeader: () => <Delete />,
+      flex: 1,
     },
   ];
   return (
-    <div className="w-full flex relative">
+    <div className="w-full flex relative overflow-hidden">
       <SideBar />
 
       {/* Content */}
@@ -141,6 +156,8 @@ const Dashboard = () => {
 
         {/* Table */}
         <Box
+          width="100%"
+          height={500}
           marginX="1rem"
           sx={{
             "& .MuiDataGrid-root": {
@@ -151,7 +168,12 @@ const Dashboard = () => {
             },
           }}
         >
-          <DataGrid checkboxSelection rows={companiesList} columns={columns} />
+          <DataGrid
+            sx={{ width: "100%", height: "100%" }}
+            checkboxSelection
+            columns={columns}
+            rows={companiesList}
+          />
         </Box>
 
         <AddCompany
