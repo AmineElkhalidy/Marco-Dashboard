@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 // Routing
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 // MUI
 import {
@@ -23,6 +23,7 @@ import Mcdonald from "../../assets/svgs/mc.svg";
 import MenuSVG from "../../assets/svgs/menu.svg";
 
 const Score = () => {
+  const { id } = useParams();
   const [checked, setChecked] = useState(true);
 
   const handleChange = (event) => {
@@ -85,19 +86,19 @@ const Score = () => {
           <Box>
             <ul className="flex items-center gap-2">
               <li className="w-[230px] h-[60px] text-textColor  rounded-[10px] text-center flex items-center justify-center">
-                <Link to="/company-details" className="text-xl">
+                <Link to={`/company/${id}`} className="text-xl">
                   Company Information
                 </Link>
               </li>
 
               <li className="w-[230px] h-[60px] bg-textColor text-white rounded-[10px] text-center flex items-center justify-center">
-                <Link to="/company-details/score" className="text-xl">
+                <Link to="#" className="text-xl">
                   Score
                 </Link>
               </li>
 
               <li className="w-[230px] h-[60px] text-textColor rounded-[10px] text-center flex items-center justify-center">
-                <Link to="/company-details/unique" className="text-xl">
+                <Link to={`/company/${id}/unique`} className="text-xl">
                   Unique
                 </Link>
               </li>

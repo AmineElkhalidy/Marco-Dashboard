@@ -90,19 +90,19 @@ const CompanyDetails = () => {
           <Box>
             <ul className="flex items-center gap-2">
               <li className="w-[230px] h-[60px] bg-textColor text-white rounded-[10px] text-center flex items-center justify-center">
-                <Link to="/company-details" className="text-xl">
+                <Link to="#" className="text-xl">
                   Company Information
                 </Link>
               </li>
 
               <li className="w-[230px] h-[60px] text-textColor rounded-[10px] text-center flex items-center justify-center">
-                <Link to="/company-details/score" className="text-xl">
+                <Link to={`/company/${id}/score`} className="text-xl">
                   Score
                 </Link>
               </li>
 
               <li className="w-[230px] h-[60px] text-textColor rounded-[10px] text-center flex items-center justify-center">
-                <Link to="/company-details/unique" className="text-xl">
+                <Link to={`/company/${id}/unique`} className="text-xl">
                   Unique
                 </Link>
               </li>
