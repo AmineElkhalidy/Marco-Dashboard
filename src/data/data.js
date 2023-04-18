@@ -1,6 +1,6 @@
 export const companiesList = [
   {
-    id: "#876369",
+    id: "876369",
     companyName: "Mcdonald's",
     location: "London",
     dateCreated: "04 Apr, 2023",
@@ -10,7 +10,7 @@ export const companiesList = [
     remove: "",
   },
   {
-    id: "#8763670",
+    id: "8763670",
     companyName: "Mcdonald's",
     location: "London",
     dateCreated: "04 Apr, 2023",
@@ -20,7 +20,7 @@ export const companiesList = [
     remove: "",
   },
   {
-    id: "#8763671",
+    id: "8763671",
     companyName: "Mcdonald's",
     location: "London",
     dateCreated: "04 Apr, 2023",
@@ -30,7 +30,7 @@ export const companiesList = [
     remove: "",
   },
   {
-    id: "#8763672",
+    id: "8763672",
     companyName: "Mcdonald's",
     location: "London",
     dateCreated: "04 Apr, 2023",
@@ -40,7 +40,7 @@ export const companiesList = [
     remove: "",
   },
   {
-    id: "#8763673",
+    id: "8763673",
     companyName: "Mcdonald's",
     location: "London",
     dateCreated: "04 Apr, 2023",
@@ -50,7 +50,7 @@ export const companiesList = [
     remove: "",
   },
   {
-    id: "#8763674",
+    id: "8763674",
     companyName: "Mcdonald's",
     location: "London",
     dateCreated: "04 Apr, 2023",

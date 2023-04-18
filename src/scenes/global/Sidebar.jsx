@@ -7,17 +7,17 @@ import { Menu, MenuItem, Sidebar, useProSidebar } from "react-pro-sidebar";
 import { Box, IconButton, Typography } from "@mui/material";
 
 // NavLink
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 // Logo
 import Logo from "../../assets/images/Logo.png";
 import { ReactComponent as List } from "../../assets/svgs/list.svg";
 
-const SideBar = () => {
+const SideBar = ({ companyName }) => {
   const { collapseSidebar, toggleSidebar, collapsed, toggled, broken, rtl } =
     useProSidebar();
 
-  const [selected, setSelected] = useState("");
+  // Extracting the company name
 
   return (
     <Box
@@ -39,7 +39,8 @@ const SideBar = () => {
       <Sidebar className="h-full">
         <Menu>
           {/* Logo */}
-          <MenuItem onClick={() => collapseSidebar()}>
+          {/* onClick={() => collapseSidebar()} */}
+          <MenuItem>
             {!collapsed && (
               <Box mt={"2rem"}>
                 <img src={Logo} alt="Gradesbar Logo" />
@@ -50,26 +51,17 @@ const SideBar = () => {
           {/* Menu items */}
           <Box paddingLeft={collapsed ? undefined : "1%"} marginTop="2rem">
             <MenuItem icon={<List />}>
-              <Typography sx={{ color: "white", fontWeight: 500 }}>
+              <Link to="/companies" className="text-white font-medium">
                 Company Lists
-              </Typography>
+              </Link>
             </MenuItem>
 
             <Box paddingLeft="2.75rem">
-              {/* <MenuItem
-                routerLink={
-                  <NavLink
-                    className={({ isActive }) =>
-                      isActive ? "activeLink" : undefined
-                    }
-                    to={"/"}
-                  />
-                }
-              >
+              <MenuItem>
                 <Typography sx={{ color: "white", fontWeight: 500 }}>
-                  Mcdonald’s
+                  {companyName}
                 </Typography>
-              </MenuItem> */}
+              </MenuItem>
             </Box>
           </Box>
         </Menu>

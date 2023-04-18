@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 // Routing
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 // MUI
 import { Box, IconButton, Typography, Switch, TextField } from "@mui/material";
@@ -16,7 +16,11 @@ import Mcdonald from "../../assets/svgs/mc.svg";
 import EditSVG from "../../assets/svgs/edit.svg";
 import UploadImage from "../../assets/images/upload.png";
 
+// Data
+import { companiesList } from "../../data/data";
+
 const CompanyDetails = () => {
+  const { id } = useParams();
   const [checked, setChecked] = useState(true);
   const [initialUpdate, setInitialUpdate] = useState(false);
   const [contactUpdate, setContactUpdate] = useState(false);
@@ -27,9 +31,12 @@ const CompanyDetails = () => {
     setChecked(event.target.checked);
   };
 
+  // Filtering the company
+  const selectedCompany = companiesList.filter((company) => company.id === id);
+  const { companyName } = selectedCompany;
   return (
     <div className="w-full flex relative ">
-      <SideBar />
+      <SideBar companyName={companyName} />
 
       {/* Content */}
       <div className="w-full bg-bgColor">

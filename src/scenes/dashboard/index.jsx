@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 
-import PropTypes from "prop-types";
-import SwipeableViews from "react-swipeable-views";
+// import PropTypes from "prop-types";
+// import SwipeableViews from "react-swipeable-views";
+
+// Routing
+import { Link } from "react-router-dom";
 
 // MUI
 import { Box, IconButton, Typography, Tabs, Tab, AppBar } from "@mui/material";
@@ -36,9 +39,18 @@ const Dashboard = () => {
   // Drawer State
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
+  const [selectionModel, setSelectionModel] = useState([]);
+
+  const [rows, setRows] = useState(companiesList);
+
   // Columns
   const columns = [
-    { field: "id", headerName: "Company ID", headerAlign: "left" },
+    {
+      field: "id",
+      headerName: "Company ID",
+      headerAlign: "left",
+      renderCell: (params) => <Typography>#{params.value}</Typography>,
+    },
     {
       field: "companyName",
       headerName: "Company Name",
@@ -115,10 +127,10 @@ const Dashboard = () => {
       align: "center",
       renderCell: (params) => (
         <div className="flex items-center h-full w-full justify-center gap-2">
-          <button>
+          <Link to={`/company/${params.id}`}>
             <img src={Edit} alt="Edit SVG" />
-          </button>
-          <button>
+          </Link>
+          <button onClick={() => handleDelete(params.id)}>
             <img src={Delete} alt="Delete SVG" />
           </button>
         </div>
@@ -139,9 +151,15 @@ const Dashboard = () => {
       ),
     },
   ];
+  const handleDelete = (id) => {
+    const updatedRows = rows.filter((row) => row.id !== id);
+    setSelectionModel([]);
+    setRows(updatedRows);
+  };
+
   return (
     <div className="w-full flex relative">
-      <SideBar />
+      <SideBar company={""} />
 
       {/* Content */}
       <div className="w-full bg-bgColor">
@@ -222,7 +240,7 @@ const Dashboard = () => {
               backgroundColor: "white",
               borderRadius: "10px",
               marginBlock: "5px",
-              padding: "0 5px",
+              padding: "0 3px",
             },
             "& .MuiDataGrid-footerContainer": {
               border: "none",
@@ -233,7 +251,12 @@ const Dashboard = () => {
             sx={{ width: "100%", height: "100%" }}
             checkboxSelection
             columns={columns}
-            rows={companiesList}
+            rows={rows}
+            selectionModel={selectionModel}
+            onSelectionModelChange={(newSelection) => {
+              setSelectionModel(newSelection);
+            }}
+            deleteRowsModel={selectionModel}
           />
         </Box>
 

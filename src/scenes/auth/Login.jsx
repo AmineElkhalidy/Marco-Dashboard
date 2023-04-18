@@ -58,7 +58,7 @@ const Login = () => {
             </div>
 
             <Link
-              to="/dashboard"
+              to="/companies"
               className="w-full text-center bg-textColor p-3 text-white rounded-[10px] uppercase font-medium"
               type="submit"
             >

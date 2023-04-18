@@ -27,11 +27,11 @@ const App = () => {
       <main className="w-full h-full font-sans">
         <Routes>
           <Route path="/" element={<Login />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/company-details" element={<CompanyDetails />} />
-          <Route path="/company-details/score" element={<Score />} />
-          <Route path="/company-details/unique" element={<Unique />} />
-          <Route path="/all-details" element={<AllCompanyInfo />} />
+          <Route path="/companies" element={<Dashboard />} />
+          <Route path="/company/:id" element={<CompanyDetails />} />
+          <Route path="/company/:id/score" element={<Score />} />
+          <Route path="/company/:id/unique" element={<Unique />} />
+          <Route path="/company/:id/all-details" element={<AllCompanyInfo />} />
         </Routes>
       </main>
     </ThemeProvider>
