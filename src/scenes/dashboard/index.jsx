@@ -12,7 +12,7 @@ import { DataGrid } from "@mui/x-data-grid";
 
 // Icons
 import { Search } from "@mui/icons-material";
-import { ReactComponent as Delete } from "../../assets/svgs/Remove.svg";
+import { ReactComponent as Remove } from "../../assets/svgs/Remove.svg";
 
 // Components
 import SideBar from "../global/Sidebar";
@@ -21,6 +21,13 @@ import AddCompany from "../company/AddCompany";
 // Images
 import ProfileImage from "../../assets/images/Profile.png";
 import LogoutSVG from "../../assets/svgs/Logout.svg";
+import Mcdonald from "../../assets/svgs/mc.svg";
+import IcEmail from "../../assets/svgs/ic-email.svg";
+import Calendar from "../../assets/svgs/ic-calendar-days.svg";
+import Edit from "../../assets/svgs/edit.svg";
+import Delete from "../../assets/svgs/delete.svg";
+import Favorite from "../../assets/svgs/favorite.svg";
+import NotFavorite from "../../assets/svgs/No-Favorite.svg";
 
 // data
 import { companiesList } from "../../data/data";
@@ -37,56 +44,103 @@ const Dashboard = () => {
       headerName: "Company Name",
       headerAlign: "center",
       align: "center",
+      renderCell: (params) => (
+        <div className="flex items-center h-full w-full justify-center gap-2">
+          <img className="w-10 h-10" src={Mcdonald} alt="Company Logo" />
+          <Typography>{params.value}</Typography>
+        </div>
+      ),
       flex: 1,
     },
     {
       field: "loaction",
       headerName: "Location",
-      flex: 1,
       headerAlign: "center",
       align: "center",
+      renderCell: (params) => (
+        <div className="flex items-center h-full w-full justify-center gap-2">
+          <img className="w-6 h-6" src={IcEmail} alt="Company Location" />
+          <Typography>{params.value}</Typography>
+        </div>
+      ),
+      flex: 1,
     },
     {
       field: "dateCreated",
       headerName: "Date Created",
-      type: "date",
-      valueGetter: (params) => new Date(params.value),
-      flex: 1,
+      // type: 'date',
+      // valueGetter: (params) => new Date(params.value),
+
       headerAlign: "center",
       align: "center",
+      renderCell: (params) => (
+        <div className="flex items-center h-full w-full justify-center gap-2">
+          <img className="w-6 h-6" src={Calendar} alt="Company Calendar" />
+          <Typography>{params.value}</Typography>
+        </div>
+      ),
+      flex: 1,
     },
     {
       field: "lastLoggedin",
       headerName: "Last Logged in",
-      type: "date",
-      valueGetter: (params) => new Date(params.value),
-      flex: 1,
+      // type: "date",
+      // valueGetter: (params) => new Date(params.value),
       headerAlign: "center",
       align: "center",
+      renderCell: (params) => (
+        <div className="flex items-center h-full w-full justify-center gap-2">
+          <img className="w-6 h-6" src={Calendar} alt="Company Calendar" />
+          <Typography>{params.value}</Typography>
+        </div>
+      ),
+      flex: 1,
     },
     {
       field: "active",
       headerName: "Active",
-      flex: 1,
       headerAlign: "center",
       align: "center",
+      renderCell: (params) => (
+        <span className="inline-block px-6 py-2 bg-[#2FE5A7] rounded-full">
+          {params.value}
+        </span>
+      ),
+      flex: 1,
     },
     {
       field: "action",
       headerName: "Action",
-      flex: 1,
       headerAlign: "center",
       align: "center",
+      renderCell: (params) => (
+        <div className="flex items-center h-full w-full justify-center gap-2">
+          <button>
+            <img src={Edit} alt="Edit SVG" />
+          </button>
+          <button>
+            <img src={Delete} alt="Delete SVG" />
+          </button>
+        </div>
+      ),
     },
     {
       field: "remove",
       headerName: "Remove",
-      renderHeader: () => <Delete />,
-      flex: 1,
+      renderHeader: () => <Remove />,
+      headerAlign: "center",
+      align: "center",
+      renderCell: (params) => (
+        <div className="flex items-center h-full w-full justify-center">
+          <button>
+            <img src={Favorite} alt="Favorite SVG" />
+          </button>
+        </div>
+      ),
     },
   ];
   return (
-    <div className="w-full flex relative overflow-hidden">
+    <div className="w-full flex relative">
       <SideBar />
 
       {/* Content */}
@@ -133,6 +187,7 @@ const Dashboard = () => {
 
         {/* Add Company */}
         <Box
+          width="100%"
           display="flex"
           justifyContent="space-between"
           alignItems="center"
@@ -147,7 +202,7 @@ const Dashboard = () => {
             Company lists
           </Typography>
           <button
-            className="bg-textColor py-[12px] px-[40px] rounded-[10px] text-white"
+            className="bg-textColor py-[12px] px-[40px] rounded-[10px] text-white mr-8"
             onClick={() => setIsDrawerOpen(true)}
           >
             New company +
@@ -156,12 +211,18 @@ const Dashboard = () => {
 
         {/* Table */}
         <Box
-          width="100%"
+          width="98%"
           height={500}
-          marginX="1rem"
+          m="0 auto"
           sx={{
             "& .MuiDataGrid-root": {
               border: "none",
+            },
+            "& .MuiDataGrid-row": {
+              backgroundColor: "white",
+              borderRadius: "10px",
+              marginBlock: "5px",
+              padding: "0 5px",
             },
             "& .MuiDataGrid-footerContainer": {
               border: "none",
