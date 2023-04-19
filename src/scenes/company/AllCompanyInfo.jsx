@@ -21,9 +21,9 @@ const AllCompanyInfo = () => {
   return (
     <section className="w-full min-h-screen bg-bgColor">
       {/* Container */}
-      <div className="w-full px-6">
+      <div className="w-full px-6 space-y-6">
         {/* Header */}
-        <div className="w-full flex justify-between items-center pt-4">
+        <div className="w-full flex justify-between pt-4 flex-col space-y-4 sm:flex-row sm:space-y-0 sm:justify-between">
           <Link to="/companies">
             <img src={Logo} alt="Gradesbar Logo" />
           </Link>
@@ -46,8 +46,8 @@ const AllCompanyInfo = () => {
         </div>
 
         {/* Body */}
-        <div className="w-full flex pt-8 pb-4 gap-6">
-          <div className="grid grid-cols-2 gap-4 w-full">
+        <div className="w-full flex pt-8 pb-4 gap-6 flex-col md:flex-row">
+          <div className="grid sm:grid-cols-2 gap-4 w-full">
             {/* Business Contact */}
             <div className="bg-white p-4 rounded-[24px] shadow-md">
               <h3 className="text-textColor text-2xl font-bold">
@@ -250,7 +250,7 @@ const AllCompanyInfo = () => {
           </div>
 
           {/* Score */}
-          <div className="bg-white shadow-md w-[50%] rounded-[24px] p-4 flex flex-col items-center">
+          <div className="bg-white shadow-md w-full sm:w-[50%] rounded-[24px] p-4 flex flex-col items-center">
             <h3 className="text-2xl font-bold mb-3">Your Score:</h3>
 
             {/* Radial Progress */}
