@@ -30,97 +30,96 @@ import UploadImage from "../../assets/images/upload.png";
 import SuccessSVG from "../../assets/svgs/success.svg";
 
 // Tabs functions
-function TabPanel(props) {
-  const { children, value, index, ...other } = props;
+// function TabPanel(props) {
+//   const { children, value, index, ...other } = props;
 
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`full-width-tabpanel-${index}`}
-      aria-labelledby={`full-width-tab-${index}`}
-      {...other}
-    >
-      {value === index && (
-        <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
-    </div>
-  );
-}
+//   return (
+//     <div
+//       role="tabpanel"
+//       hidden={value !== index}
+//       id={`full-width-tabpanel-${index}`}
+//       aria-labelledby={`full-width-tab-${index}`}
+//       {...other}
+//     >
+//       {value === index && (
+//         <Box sx={{ p: 3 }}>
+//           <Typography>{children}</Typography>
+//         </Box>
+//       )}
+//     </div>
+//   );
+// }
 
-TabPanel.propTypes = {
-  children: PropTypes.node,
-  index: PropTypes.number.isRequired,
-  value: PropTypes.number.isRequired,
-};
+// TabPanel.propTypes = {
+//   children: PropTypes.node,
+//   index: PropTypes.number.isRequired,
+//   value: PropTypes.number.isRequired,
+// };
 
-function a11yProps(index) {
-  return {
-    id: `full-width-tab-${index}`,
-    "aria-controls": `full-width-tabpanel-${index}`,
-  };
-}
+// function a11yProps(index) {
+//   return {
+//     id: `full-width-tab-${index}`,
+//     "aria-controls": `full-width-tabpanel-${index}`,
+//   };
+// }
 
-// Tabs
-function FullWidthTabs() {
-  const [value, setValue] = React.useState(0);
+// function FullWidthTabs() {
+//   const [value, setValue] = React.useState(0);
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
+//   const handleChange = (event, newValue) => {
+//     setValue(newValue);
+//   };
 
-  const handleChangeIndex = (index) => {
-    setValue(index);
-  };
+//   const handleChangeIndex = (index) => {
+//     setValue(index);
+//   };
 
-  return (
-    <Box
-      my={3}
-      sx={{
-        "& .MuiPaper-root": {
-          background: "#000223",
-          borderRadius: "10px",
-          paddingInline: ".65rem",
-        },
-      }}
-    >
-      <AppBar position="static">
-        <Tabs
-          value={value}
-          onChange={handleChange}
-          indicatorColor="secondary"
-          textColor="inherit"
-          variant="fullWidth"
-          aria-label="full width tabs example"
-        >
-          <Tab label="Initial infos" {...a11yProps(0)} />
-          <Tab label="Contact" {...a11yProps(1)} />
-          <Tab label="Media" {...a11yProps(2)} />
-          <Tab label="Reviews" {...a11yProps(3)} />
-        </Tabs>
-      </AppBar>
-      <SwipeableViews axis="x" index={value} onChangeIndex={handleChangeIndex}>
-        <TabPanel value={value} index={0}>
-          {/* <InitialInfo /> */}
-        </TabPanel>
-        <TabPanel value={value} index={1}>
-          {/* <Contact /> */}
-        </TabPanel>
-        <TabPanel value={value} index={2}>
-          {/* <Media /> */}
-        </TabPanel>
-        <TabPanel value={value} index={3}>
-          {/* <Reviews /> */}
-        </TabPanel>
-      </SwipeableViews>
-    </Box>
-  );
-}
+//   return (
+//     <Box
+//       my={3}
+//       sx={{
+//         "& .MuiPaper-root": {
+//           background: "#000223",
+//           borderRadius: "10px",
+//           paddingInline: ".65rem",
+//         },
+//       }}
+//     >
+//       <AppBar position="static">
+//         <Tabs
+//           value={value}
+//           onChange={handleChange}
+//           indicatorColor="secondary"
+//           textColor="inherit"
+//           variant="fullWidth"
+//           aria-label="full width tabs example"
+//         >
+//           <Tab label="Initial infos" {...a11yProps(0)} />
+//           <Tab label="Contact" {...a11yProps(1)} />
+//           <Tab label="Media" {...a11yProps(2)} />
+//           <Tab label="Reviews" {...a11yProps(3)} />
+//         </Tabs>
+//       </AppBar>
+//       <SwipeableViews axis="x" index={value} onChangeIndex={handleChangeIndex}>
+//         <TabPanel value={value} index={0}>
+//           {/* <InitialInfo /> */}
+//         </TabPanel>
+//         <TabPanel value={value} index={1}>
+//           {/* <Contact /> */}
+//         </TabPanel>
+//         <TabPanel value={value} index={2}>
+//           {/* <Media /> */}
+//         </TabPanel>
+//         <TabPanel value={value} index={3}>
+//           {/* <Reviews /> */}
+//         </TabPanel>
+//       </SwipeableViews>
+//     </Box>
+//   );
+// }
 
 // Initial info tab
-function InitialInfo({ next, setIsDrawerOpen }) {
+function InitialInfo({ next, setIsDrawerOpen, handleChange }) {
   const [open, setOpen] = useState(false);
 
   const [color, setColor] = useState("#000000");
@@ -255,7 +254,10 @@ function InitialInfo({ next, setIsDrawerOpen }) {
           Back
         </button>
         <button
-          onClick={next}
+          onClick={(event) => {
+            handleChange(event, "Contact");
+            next();
+          }}
           className="py-4 px-12 text-[18px] font-medium text-white rounded-[10px] bg-textColor"
         >
           Save
@@ -266,7 +268,7 @@ function InitialInfo({ next, setIsDrawerOpen }) {
 }
 
 // Contact Tab
-function Contact({ next, prev }) {
+function Contact({ next, prev, handleChange }) {
   return (
     <Box width="100%">
       <Box component="form" width="100%">
@@ -290,13 +292,19 @@ function Contact({ next, prev }) {
         mt="3rem"
       >
         <button
-          onClick={prev}
+          onClick={(event) => {
+            handleChange(event, "Initial infos");
+            prev();
+          }}
           className="py-4 px-12 border border-textColor text-[18px] font-medium text-textColor rounded-[10px] "
         >
           Back
         </button>
         <button
-          onClick={next}
+          onClick={(event) => {
+            handleChange(event, "Media");
+            next();
+          }}
           className="py-4 px-12 text-[18px] font-medium text-white rounded-[10px] bg-textColor"
         >
           Save
@@ -307,7 +315,7 @@ function Contact({ next, prev }) {
 }
 
 // Media Tab
-function Media({ next, prev }) {
+function Media({ next, prev, handleChange }) {
   return (
     <Box width="100%">
       <Box component="form" width="100%">
@@ -340,13 +348,19 @@ function Media({ next, prev }) {
         mt="3rem"
       >
         <button
-          onClick={prev}
+          onClick={(event) => {
+            handleChange(event, "Contact");
+            prev();
+          }}
           className="py-4 px-12 border border-textColor text-[18px] font-medium text-textColor rounded-[10px] "
         >
           Back
         </button>
         <button
-          onClick={next}
+          onClick={(event) => {
+            handleChange(event, "Reviews");
+            next();
+          }}
           className="py-4 px-12 text-[18px] font-medium text-white rounded-[10px] bg-textColor"
         >
           Save
@@ -357,7 +371,7 @@ function Media({ next, prev }) {
 }
 
 // Reviews Tab
-function Reviews({ next, prev }) {
+function Reviews({ next, prev, handleChange }) {
   return (
     <Box width="100%">
       <Box component="form" width="100%">
@@ -401,7 +415,10 @@ function Reviews({ next, prev }) {
         mt="3rem"
       >
         <button
-          onClick={prev}
+          onClick={(event) => {
+            handleChange(event, "Media");
+            prev();
+          }}
           className="py-4 px-12 border border-textColor text-[18px] font-medium text-textColor rounded-[10px] "
         >
           Back
@@ -444,20 +461,29 @@ function Success({ setIsDrawerOpen }) {
 }
 
 // Steps builder
-function StepsBuilder({ setIsDrawerOpen }) {
+function StepsBuilder({ setIsDrawerOpen, handleChange }) {
   const { next, prev } = useSteps();
   return (
     <Steps>
-      <InitialInfo next={next} setIsDrawerOpen={setIsDrawerOpen} />
-      <Contact next={next} prev={prev} />
-      <Media next={next} prev={prev} />
-      <Reviews next={next} prev={prev} />
+      <InitialInfo
+        next={next}
+        setIsDrawerOpen={setIsDrawerOpen}
+        handleChange={handleChange}
+      />
+      <Contact next={next} prev={prev} handleChange={handleChange} />
+      <Media next={next} prev={prev} handleChange={handleChange} />
+      <Reviews next={next} prev={prev} handleChange={handleChange} />
       <Success setIsDrawerOpen={setIsDrawerOpen} />
     </Steps>
   );
 }
 
 const AddCompany = ({ open, onClose, setIsDrawerOpen }) => {
+  const [value, setValue] = React.useState("Initial infos");
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
   return (
     <Drawer anchor="right" open={open} onClose={onClose}>
       <Box width="500px" padding="2rem">
@@ -477,10 +503,27 @@ const AddCompany = ({ open, onClose, setIsDrawerOpen }) => {
         </Box>
 
         {/* Drawer tabs */}
-        <FullWidthTabs />
+        <Box sx={{ width: "100%", marginTop: "1rem", marginBottom: "2rem" }}>
+          <Tabs
+            value={value}
+            onChange={handleChange}
+            textColor="secondary"
+            indicatorColor="secondary"
+            aria-label="secondary tabs example"
+          >
+            <Tab value="Initial infos" label="Initial infos" />
+            <Tab value="Contact" label="Contact" />
+            <Tab value="Media" label="Media" />
+            <Tab value="Reviews" label="Reviews" />
+          </Tabs>
+        </Box>
+
         <Box width="100%">
           <StepsProvider>
-            <StepsBuilder setIsDrawerOpen={setIsDrawerOpen} />
+            <StepsBuilder
+              setIsDrawerOpen={setIsDrawerOpen}
+              handleChange={handleChange}
+            />
           </StepsProvider>
         </Box>
       </Box>
