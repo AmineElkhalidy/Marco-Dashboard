@@ -17,8 +17,6 @@ const SideBar = ({ companyName }) => {
   const { collapseSidebar, toggleSidebar, collapsed, toggled, broken, rtl } =
     useProSidebar();
 
-  // Extracting the company name
-
   return (
     <Box
       sx={{

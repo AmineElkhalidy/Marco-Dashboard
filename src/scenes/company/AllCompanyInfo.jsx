@@ -1,5 +1,8 @@
 import React from "react";
 
+// Routing
+import { Link } from "react-router-dom";
+
 // Images
 import Logo from "../../assets/images/NoBg-Logo.png";
 import Mcdonald from "../../assets/svgs/mc.svg";
@@ -21,7 +24,9 @@ const AllCompanyInfo = () => {
       <div className="w-full px-6">
         {/* Header */}
         <div className="w-full flex justify-between items-center pt-4">
-          <img src={Logo} alt="Gradesbar Logo" />
+          <Link to="/companies">
+            <img src={Logo} alt="Gradesbar Logo" />
+          </Link>
 
           {/* Company Details */}
           <div className="flex gap-3">
@@ -267,7 +272,9 @@ const AllCompanyInfo = () => {
             </div>
 
             <div className="text-center">
-              <h4 className="text-xl font-bold">How Score is calculated:</h4>
+              <h4 className="text-xl font-bold mb-3">
+                How Score is calculated:
+              </h4>
 
               <div className="space-y-2">
                 <span className="inline-block py-2 px-4 bg-[#FE7A4926] rounded-[50px] font-semibold">

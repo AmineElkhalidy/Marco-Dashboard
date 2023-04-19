@@ -195,6 +195,18 @@ const Score = () => {
                 <img src={MenuSVG} alt="Menu" />
               </button>
             </div>
+            <div className="w-full h-full flex justify-center items-center">
+              <div
+                className="radial-progress text-textColor "
+                style={{
+                  "--value": 70,
+                  "--size": "12rem",
+                  "--thickness": "16px",
+                }}
+              >
+                <p className="text-4xl font-semibold text-textColor">90</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>

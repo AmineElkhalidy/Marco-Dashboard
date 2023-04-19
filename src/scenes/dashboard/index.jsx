@@ -6,6 +6,9 @@ import React, { useState } from "react";
 // Routing
 import { Link } from "react-router-dom";
 
+// Helmet
+import { Helmet } from "react-helmet";
+
 // MUI
 import { Box, IconButton, Typography, Tabs, Tab, AppBar } from "@mui/material";
 import InputBase from "@mui/material/InputBase";
@@ -65,7 +68,7 @@ const Dashboard = () => {
       flex: 1,
     },
     {
-      field: "loaction",
+      field: "location",
       headerName: "Location",
       headerAlign: "center",
       align: "center",
@@ -114,9 +117,17 @@ const Dashboard = () => {
       headerAlign: "center",
       align: "center",
       renderCell: (params) => (
-        <span className="inline-block px-6 py-2 bg-[#2FE5A7] rounded-full">
-          {params.value}
-        </span>
+        <div>
+          {params.value === true ? (
+            <span className="inline-block px-6 py-2 bg-[#2FE5A7] rounded-full">
+              Yes
+            </span>
+          ) : (
+            <span className="inline-block px-6 py-2 bg-[#FB4B4B] rounded-full">
+              No
+            </span>
+          )}
+        </div>
       ),
       flex: 1,
     },
@@ -137,20 +148,27 @@ const Dashboard = () => {
       ),
     },
     {
-      field: "remove",
-      headerName: "Remove",
+      field: "favorite",
+      headerName: "Favorite",
       renderHeader: () => <Remove />,
       headerAlign: "center",
       align: "center",
       renderCell: (params) => (
         <div className="flex items-center h-full w-full justify-center">
-          <button>
-            <img src={Favorite} alt="Favorite SVG" />
-          </button>
+          {params.value === true ? (
+            <button onClick={() => {}}>
+              <img src={Favorite} alt="Favorite SVG" />
+            </button>
+          ) : (
+            <button onClick={() => {}}>
+              <img src={NotFavorite} alt="Not Favorite SVG" />
+            </button>
+          )}
         </div>
       ),
     },
   ];
+
   const handleDelete = (id) => {
     const updatedRows = rows.filter((row) => row.id !== id);
     setSelectionModel([]);
@@ -158,115 +176,123 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="w-full flex relative">
-      <SideBar company={""} />
+    <>
+      <Helmet>
+        <title>Dashboard - Gradesbar</title>
+      </Helmet>
 
-      {/* Content */}
-      <div className="w-full bg-bgColor">
-        {/* Search input + Profile */}
-        <Box position="relative" p={2}>
-          {/* Search bar */}
-          <Box
-            display="flex"
-            borderRadius="10px"
-            borderColor="#787878"
-            sx={{ background: "#FFF", width: "45%" }}
-          >
-            <InputBase sx={{ ml: 2, flex: 1 }} placeholder="Search" />
-            <IconButton type="button" sx={{ p: 1 }}>
-              <Search />
-            </IconButton>
-          </Box>
+      <div className="w-full flex relative">
+        <SideBar companyName={""} />
 
-          {/* Profile */}
-          <Box
-            display="flex"
-            gap={2}
-            sx={{ position: "absolute", top: ".8rem", right: "1rem" }}
-          >
-            <Box display="flex" alignItems="center" gap={1}>
-              <img
-                className="bg-white rounded-lg"
-                src={ProfileImage}
-                alt="Profile photo"
-              />
-
-              <Box>
-                <h3 className="text-sm">Username</h3>
-                <span className="text-sm">Free Account</span>
-              </Box>
+        {/* Content */}
+        <div className="w-full bg-bgColor p-4">
+          {/* Search input + Profile */}
+          <Box position="relative" p={1}>
+            {/* Search bar */}
+            <Box
+              display="flex"
+              borderRadius="10px"
+              borderColor="#787878"
+              sx={{ background: "#FFF", width: "45%" }}
+            >
+              <InputBase sx={{ ml: 2, flex: 1 }} placeholder="Search" />
+              <IconButton type="button" sx={{ p: 1 }}>
+                <Search />
+              </IconButton>
             </Box>
 
-            <IconButton>
-              <img src={LogoutSVG} alt="Logout svg" />
-            </IconButton>
+            {/* Profile */}
+            <Box
+              display="flex"
+              gap={2}
+              sx={{ position: "absolute", top: ".5rem", right: "1rem" }}
+            >
+              <Box display="flex" alignItems="center" gap={1}>
+                <img
+                  className="bg-white rounded-lg"
+                  src={ProfileImage}
+                  alt="Profile photo"
+                />
+
+                <Box>
+                  <h3 className="text-sm">Username</h3>
+                  <span className="text-sm">Free Account</span>
+                </Box>
+              </Box>
+
+              <IconButton>
+                <Link to="/">
+                  <img src={LogoutSVG} alt="Logout svg" />
+                </Link>
+              </IconButton>
+            </Box>
           </Box>
-        </Box>
 
-        {/* Add Company */}
-        <Box
-          width="100%"
-          display="flex"
-          justifyContent="space-between"
-          alignItems="center"
-          marginX="1rem"
-          marginY="2rem"
-        >
-          <Typography
-            variant="h2"
-            className="text-textColor"
-            sx={{ fontSize: "25px", fontWeight: 700 }}
+          {/* Add Company */}
+          <Box
+            width="100%"
+            display="flex"
+            justifyContent="space-between"
+            alignItems="center"
+            marginX="1rem"
+            marginY="2rem"
           >
-            Company lists
-          </Typography>
-          <button
-            className="bg-textColor py-[12px] px-[40px] rounded-[10px] text-white mr-8"
-            onClick={() => setIsDrawerOpen(true)}
-          >
-            New company +
-          </button>
-        </Box>
+            <Typography
+              variant="h2"
+              className="text-textColor"
+              sx={{ fontSize: "25px", fontWeight: 700 }}
+            >
+              Company lists
+            </Typography>
+            <button
+              className="bg-textColor py-[12px] px-[40px] rounded-[10px] text-white mr-8"
+              onClick={() => setIsDrawerOpen(true)}
+            >
+              New company +
+            </button>
+          </Box>
 
-        {/* Table */}
-        <Box
-          width="98%"
-          height={500}
-          m="0 auto"
-          sx={{
-            "& .MuiDataGrid-root": {
-              border: "none",
-            },
-            "& .MuiDataGrid-row": {
-              backgroundColor: "white",
-              borderRadius: "10px",
-              marginBlock: "5px",
-              padding: "0 3px",
-            },
-            "& .MuiDataGrid-footerContainer": {
-              border: "none",
-            },
-          }}
-        >
-          <DataGrid
-            sx={{ width: "100%", height: "100%" }}
-            checkboxSelection
-            columns={columns}
-            rows={rows}
-            selectionModel={selectionModel}
-            onSelectionModelChange={(newSelection) => {
-              setSelectionModel(newSelection);
+          {/* Table */}
+          <Box
+            width="98%"
+            height={500}
+            m="0 auto"
+            sx={{
+              "& .MuiDataGrid-root": {
+                border: "none",
+              },
+              "& .MuiDataGrid-row": {
+                backgroundColor: "white",
+                borderRadius: "10px",
+                marginBlock: "5px",
+                padding: "0 3px",
+              },
+              "& .MuiDataGrid-footerContainer": {
+                border: "none",
+              },
             }}
-            deleteRowsModel={selectionModel}
-          />
-        </Box>
+          >
+            <DataGrid
+              sx={{ width: "100%", height: "100%" }}
+              checkboxSelection
+              columns={columns}
+              rows={rows}
+              selectionModel={selectionModel}
+              onSelectionModelChange={(newSelection) => {
+                setSelectionModel(newSelection);
+              }}
+              deleteRowsModel={selectionModel}
+            />
+          </Box>
 
-        <AddCompany
-          open={isDrawerOpen}
-          onClose={() => setIsDrawerOpen(false)}
-          setIsDrawerOpen={setIsDrawerOpen}
-        />
+          <AddCompany
+            open={isDrawerOpen}
+            onClose={() => setIsDrawerOpen(false)}
+            setIsDrawerOpen={setIsDrawerOpen}
+          />
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 
 // Lib
-// import PropTypes from "prop-types";
-// import SwipeableViews from "react-swipeable-views";
+import PropTypes from "prop-types";
+import SwipeableViews from "react-swipeable-views";
 
 // Routing
 import { Link } from "react-router-dom";
+
+// Color Picker
+import { SketchPicker } from "react-color";
 
 // MUI
 import {
@@ -27,95 +30,104 @@ import UploadImage from "../../assets/images/upload.png";
 import SuccessSVG from "../../assets/svgs/success.svg";
 
 // Tabs functions
-// function TabPanel(props) {
-//   const { children, value, index, ...other } = props;
+function TabPanel(props) {
+  const { children, value, index, ...other } = props;
 
-//   return (
-//     <div
-//       role="tabpanel"
-//       hidden={value !== index}
-//       id={`full-width-tabpanel-${index}`}
-//       aria-labelledby={`full-width-tab-${index}`}
-//       {...other}
-//     >
-//       {value === index && (
-//         <Box sx={{ p: 3 }}>
-//           <Typography>{children}</Typography>
-//         </Box>
-//       )}
-//     </div>
-//   );
-// }
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`full-width-tabpanel-${index}`}
+      aria-labelledby={`full-width-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box sx={{ p: 3 }}>
+          <Typography>{children}</Typography>
+        </Box>
+      )}
+    </div>
+  );
+}
 
-// TabPanel.propTypes = {
-//   children: PropTypes.node,
-//   index: PropTypes.number.isRequired,
-//   value: PropTypes.number.isRequired,
-// };
+TabPanel.propTypes = {
+  children: PropTypes.node,
+  index: PropTypes.number.isRequired,
+  value: PropTypes.number.isRequired,
+};
 
-// function a11yProps(index) {
-//   return {
-//     id: `full-width-tab-${index}`,
-//     "aria-controls": `full-width-tabpanel-${index}`,
-//   };
-// }
+function a11yProps(index) {
+  return {
+    id: `full-width-tab-${index}`,
+    "aria-controls": `full-width-tabpanel-${index}`,
+  };
+}
 
-// function FullWidthTabs() {
-//   const [value, setValue] = React.useState(0);
+// Tabs
+function FullWidthTabs() {
+  const [value, setValue] = React.useState(0);
 
-//   const handleChange = (event, newValue) => {
-//     setValue(newValue);
-//   };
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
 
-//   const handleChangeIndex = (index) => {
-//     setValue(index);
-//   };
+  const handleChangeIndex = (index) => {
+    setValue(index);
+  };
 
-//   return (
-//     <Box
-//       my={3}
-//       sx={{
-//         "& .MuiPaper-root": {
-//           background: "#000223",
-//           borderRadius: "10px",
-//           paddingInline: ".65rem",
-//         },
-//       }}
-//     >
-//       <AppBar position="static">
-//         <Tabs
-//           value={value}
-//           onChange={handleChange}
-//           indicatorColor="secondary"
-//           textColor="inherit"
-//           variant="fullWidth"
-//           aria-label="full width tabs example"
-//         >
-//           <Tab label="Initial infos" {...a11yProps(0)} />
-//           <Tab label="Contact" {...a11yProps(1)} />
-//           <Tab label="Media" {...a11yProps(2)} />
-//           <Tab label="Reviews" {...a11yProps(3)} />
-//         </Tabs>
-//       </AppBar>
-//       <SwipeableViews axis="x" index={value} onChangeIndex={handleChangeIndex}>
-//         <TabPanel value={value} index={0}>
-//           {/* <InitialInfo /> */}
-//         </TabPanel>
-//         <TabPanel value={value} index={1}>
-//           {/* <Contact /> */}
-//         </TabPanel>
-//         <TabPanel value={value} index={2}>
-//           {/* <Media /> */}
-//         </TabPanel>
-//         <TabPanel value={value} index={3}>
-//           {/* <Reviews /> */}
-//         </TabPanel>
-//       </SwipeableViews>
-//     </Box>
-//   );
-// }
+  return (
+    <Box
+      my={3}
+      sx={{
+        "& .MuiPaper-root": {
+          background: "#000223",
+          borderRadius: "10px",
+          paddingInline: ".65rem",
+        },
+      }}
+    >
+      <AppBar position="static">
+        <Tabs
+          value={value}
+          onChange={handleChange}
+          indicatorColor="secondary"
+          textColor="inherit"
+          variant="fullWidth"
+          aria-label="full width tabs example"
+        >
+          <Tab label="Initial infos" {...a11yProps(0)} />
+          <Tab label="Contact" {...a11yProps(1)} />
+          <Tab label="Media" {...a11yProps(2)} />
+          <Tab label="Reviews" {...a11yProps(3)} />
+        </Tabs>
+      </AppBar>
+      <SwipeableViews axis="x" index={value} onChangeIndex={handleChangeIndex}>
+        <TabPanel value={value} index={0}>
+          {/* <InitialInfo /> */}
+        </TabPanel>
+        <TabPanel value={value} index={1}>
+          {/* <Contact /> */}
+        </TabPanel>
+        <TabPanel value={value} index={2}>
+          {/* <Media /> */}
+        </TabPanel>
+        <TabPanel value={value} index={3}>
+          {/* <Reviews /> */}
+        </TabPanel>
+      </SwipeableViews>
+    </Box>
+  );
+}
 
+// Initial info tab
 function InitialInfo({ next, setIsDrawerOpen }) {
+  const [open, setOpen] = useState(false);
+
+  const [color, setColor] = useState("#000000");
+  const handleColorChange = (color, event) => {
+    setColor(color);
+  };
+
   return (
     <Box width="100%">
       <Box component="form" width="100%">
@@ -161,7 +173,7 @@ function InitialInfo({ next, setIsDrawerOpen }) {
 
       {/* Color Picker */}
       <Box width="100%" mt={4}>
-        <Box>
+        <Box position="relative">
           <Box
             display="flex"
             justifyContent="space-between"
@@ -171,11 +183,24 @@ function InitialInfo({ next, setIsDrawerOpen }) {
               Color
             </Typography>
 
-            <button className="text-[#788B9A] font-medium hover:text-textColor">
+            <button
+              onClick={() => setOpen((prev) => !prev)}
+              className="text-[#788B9A] font-medium hover:text-textColor p-2 z-50"
+            >
               + Add
             </button>
           </Box>
+
+          {open && (
+            <Box position="absolute" top={8} right={2} py={4}>
+              <SketchPicker
+                color={color}
+                onChangeComplete={handleColorChange}
+              />
+            </Box>
+          )}
         </Box>
+
         {/* First Row of Colors */}
         <Box width="100%" display="flex" justifyContent="space-between" my={2}>
           {[
@@ -187,10 +212,11 @@ function InitialInfo({ next, setIsDrawerOpen }) {
             "#3B82F6",
             "#6467F2",
           ].map((color, index) => (
-            <div
+            <button
               key={index}
               className="w-[24px] h-[24px] rounded-full"
               style={{ background: color }}
+              onClick={() => setOpen((prev) => !prev)}
             />
           ))}
         </Box>
@@ -239,6 +265,7 @@ function InitialInfo({ next, setIsDrawerOpen }) {
   );
 }
 
+// Contact Tab
 function Contact({ next, prev }) {
   return (
     <Box width="100%">
@@ -279,6 +306,7 @@ function Contact({ next, prev }) {
   );
 }
 
+// Media Tab
 function Media({ next, prev }) {
   return (
     <Box width="100%">
@@ -328,6 +356,7 @@ function Media({ next, prev }) {
   );
 }
 
+// Reviews Tab
 function Reviews({ next, prev }) {
   return (
     <Box width="100%">
@@ -388,6 +417,7 @@ function Reviews({ next, prev }) {
   );
 }
 
+// Success
 function Success({ setIsDrawerOpen }) {
   return (
     <Box
@@ -413,6 +443,7 @@ function Success({ setIsDrawerOpen }) {
   );
 }
 
+// Steps builder
 function StepsBuilder({ setIsDrawerOpen }) {
   const { next, prev } = useSteps();
   return (
@@ -446,8 +477,7 @@ const AddCompany = ({ open, onClose, setIsDrawerOpen }) => {
         </Box>
 
         {/* Drawer tabs */}
-        {/* <FullWidthTabs /> */}
-
+        <FullWidthTabs />
         <Box width="100%">
           <StepsProvider>
             <StepsBuilder setIsDrawerOpen={setIsDrawerOpen} />
