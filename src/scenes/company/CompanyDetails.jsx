@@ -103,7 +103,9 @@ const CompanyDetails = () => {
               </Box>
 
               <IconButton>
-                <img src={LogoutSVG} alt="Logout svg" />
+                <Link to="/">
+                  <img src={LogoutSVG} alt="Logout svg" />
+                </Link>
               </IconButton>
             </Box>
           </Box>
