@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import Login from "./scenes/auth/Login";
 import Dashboard from "./scenes/dashboard";
