@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 
 // Pro Sidebar Components
 import { Menu, MenuItem, Sidebar, useProSidebar } from "react-pro-sidebar";
 
 // MUI
-import { Box, IconButton, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 
 // NavLink
 import { Link } from "react-router-dom";
