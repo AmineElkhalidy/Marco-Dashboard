@@ -11,15 +11,7 @@ import { Link } from "react-router-dom";
 import { SketchPicker } from "react-color";
 
 // MUI
-import {
-  Box,
-  Typography,
-  Drawer,
-  Tabs,
-  Tab,
-  TextField,
-  AppBar,
-} from "@mui/material";
+import { Box, Typography, Drawer, Tabs, Tab, TextField } from "@mui/material";
 
 // Steps
 import { Steps, StepsProvider, useSteps } from "react-step-builder";
